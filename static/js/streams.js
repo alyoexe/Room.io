@@ -140,3 +140,51 @@ document.getElementById('leave-btn').addEventListener('click', leaveAndRemoveLoc
 document.getElementById('camera-btn').addEventListener('click', toggleCamera)
 document.getElementById('mic-btn').addEventListener('click', toggleMic)
 
+// Make video containers draggable
+function makeContainersDraggable() {
+    const containers = document.querySelectorAll('.video-container');
+    containers.forEach(container => {
+        container.setAttribute('draggable', true);
+
+        container.ondragstart = function (e) {
+            e.dataTransfer.setData('text/plain', container.id);
+            container.classList.add('dragging');
+        };
+
+        container.ondragend = function () {
+            container.classList.remove('dragging');
+        };
+
+        container.ondragover = function (e) {
+            e.preventDefault();
+            container.classList.add('drag-over');
+        };
+
+        container.ondragleave = function () {
+            container.classList.remove('drag-over');
+        };
+
+        container.ondrop = function (e) {
+            e.preventDefault();
+            container.classList.remove('drag-over');
+            const draggedId = e.dataTransfer.getData('text/plain');
+            const draggedElem = document.getElementById(draggedId);
+            if (draggedElem && draggedElem !== container) {
+                // Swap the two containers
+                const parent = container.parentNode;
+                if (parent) {
+                    parent.insertBefore(draggedElem, container.nextSibling);
+                }
+            }
+        };
+    });
+}
+
+// Call after adding new video containers
+function observeVideoContainers() {
+    const observer = new MutationObserver(makeContainersDraggable);
+    observer.observe(document.getElementById('video-streams'), { childList: true });
+    makeContainersDraggable();
+}
+observeVideoContainers();
+

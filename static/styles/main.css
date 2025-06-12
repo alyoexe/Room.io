@@ -93,6 +93,7 @@ body{
 }
 
 #video-streams{
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     height: 85vh;
@@ -132,6 +133,13 @@ body{
     border-radius: 5px;
     color: #fff;
     font-size: 14px;
+}
+
+.video-container.dragging {
+    opacity: 0.5;
+}
+.video-container.drag-over {
+    outline: 2px dashed #4b5dac;
 }
 
 @media screen and (max-width:1650px) {
