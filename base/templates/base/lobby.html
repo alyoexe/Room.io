@@ -11,11 +11,23 @@
         </div>
     <form id="form">
         <div class="form-field">
-            <input type="text" name="room" placeholder="Enter room name..." style="text-transform: uppercase;"/>
+            <input type="text" id="roomNameInput" name="room" placeholder="Enter room name..." style="text-transform: uppercase;"/>
         </div>
         <div class="form-field">
-            <input type="text" name="username" placeholder="Enter your name..." style="text-transform: uppercase;"/>
+            <input type="text" id="nameInput" name="username" placeholder="Enter your name..." style="text-transform: uppercase;"/>
         </div>
+        <div>
+            <label>
+                <input type="radio" name="is_public" value="True" checked>
+                Public
+            </label>
+            <label>
+                <input type="radio" name="is_public" value="False">
+                Private
+            </label>
+        </div>
+
+
         <div class="form-field">
             <input type="submit" value="Join Stream"/>
         </div>
@@ -23,6 +35,12 @@
 </main>
 
 <script type="text/javascript" >
+    const params = new URLSearchParams(window.location.search);
+    const roomName = params.get('room_name');
+    // If present, set the input value; if not, leave it empty
+    if (roomName) {
+        document.getElementById('roomNameInput').value = roomName;
+    }
     let form = document.getElementById("form")
     let handleSubmit = async (e) => {
         e.preventDefault()
@@ -33,10 +51,12 @@
         let data = await response.json()
         let UID = data.uid
         let token = data.token
+        let is_public = e.target.is_public.value
         sessionStorage.setItem("room", room)
         sessionStorage.setItem("UID", UID)
         sessionStorage.setItem("token", token)
         sessionStorage.setItem("name", name)
+        sessionStorage.setItem("is_public", is_public)
         window.open('/room/', '_self')
     }
 

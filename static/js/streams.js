@@ -4,7 +4,7 @@ const CHANNEL = sessionStorage.getItem('room')
 let UID = sessionStorage.getItem('UID')
 
 let NAME = sessionStorage.getItem('name')
-
+let is_public = sessionStorage.getItem('is_public')
 const client = AgoraRTC.createClient({mode:'rtc', codec:'vp8'})
 
 let localTracks = []
@@ -102,13 +102,25 @@ let toggleMic = async (e) => {
     }
 }
 
+let createRoom = async () => {
+    let response = await fetch('/create_room/', {
+        method:'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'is_public':is_public, 'room_name':CHANNEL})
+    })
+    let room = await response.json()
+    return room
+}
+
 let createMember = async () => {
     let response = await fetch('/create_member/', {
         method:'POST',
         headers: {
             'Content-Type':'application/json'
         },
-        body:JSON.stringify({'name':NAME, 'room_name':CHANNEL, 'UID':UID})
+        body:JSON.stringify({'name':NAME, 'room_name':CHANNEL, 'UID':UID,'is_public':is_public})
     })
     let member = await response.json()
     return member

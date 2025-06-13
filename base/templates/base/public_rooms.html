@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Public Rooms</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #e0e7ff 0%, #f4f6fa 100%);
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .room-list {
+            max-width: 700px;
+            margin: 48px auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(75, 93, 172, 0.10);
+            padding: 32px 32px 24px 32px;
+        }
+        h2 {
+            text-align: center;
+            color: #4b5dac;
+            margin-bottom: 32px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .room-card {
+            border: 1px solid #e0e7ff;
+            border-radius: 10px;
+            padding: 20px 24px 16px 24px;
+            margin-bottom: 22px;
+            background: #f8faff;
+            transition: box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(75, 93, 172, 0.04);
+            position: relative;
+        }
+        .room-card:hover {
+            box-shadow: 0 6px 24px rgba(75, 93, 172, 0.13);
+            border-color: #4b5dac;
+        }
+        .room-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2a2e4a;
+            margin-bottom: 6px;
+        }
+        .room-info {
+            margin: 6px 0 10px 0;
+            color: #4b5dac;
+            font-size: 0.98em;
+        }
+        .room-info span {
+            margin-right: 18px;
+        }
+        .room-desc {
+            margin: 8px 0 16px 0;
+            color: #555;
+            font-size: 1em;
+        }
+        .join-btn {
+            background: linear-gradient(90deg, #4b5dac 60%, #6c7ae0 100%);
+            color: #fff;
+            padding: 8px 22px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 2px 8px rgba(75, 93, 172, 0.07);
+            transition: background 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            position: absolute;
+            right: 24px;
+            bottom: 18px;
+        }
+        .join-btn:hover {
+            background: linear-gradient(90deg, #6c7ae0 0%, #4b5dac 100%);
+            box-shadow: 0 4px 16px rgba(75, 93, 172, 0.18);
+        }
+        .no-rooms {
+            text-align: center;
+            color: #888;
+            font-size: 1.1em;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="room-list">
+        <h2>Public Rooms</h2>
+        {% if rooms %}
+            {% for room in rooms %}
+                <div class="room-card">
+                    <div class="room-title">{{ room.room_name }}</div>
+                    <div class="room-info">
+                        <span>Created by: {{ room.owner.name|default:"Unknown" }}</span>
+                        <span>Members: {{ room.members.count }}</span>
+                    </div>
+                    <div class="room-desc">{{ room.description|default:"No description." }}</div>
+                    <a class="join-btn" href="{% url 'lobby' %}?room_name={{ room.room_name }}">Join</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-rooms">No public rooms available.</div>
+        {% endif %}
+    </div>
+</body>
+</html>
