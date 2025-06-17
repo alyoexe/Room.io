@@ -6,8 +6,8 @@
     <section id="form-container">
         <img id="logo" src="{% static 'images/chat-icon.png' %}" />
         <div id="welcome-message">
-            <h1>Welcome to MyChat</h1>
-            <p>Join the conversation and connect with others.</p>
+            <h1>Welcome to Room.io</h1>
+            <!-- <p>Join the conversation and connect with others.</p> -->
         </div>
     <form id="form">
         <div class="form-field">
@@ -29,8 +29,32 @@
 
 
         <div class="form-field">
-            <input type="submit" value="Join Stream"/>
+            <input type="submit" value="Join Stream" style="font-family: 'Savate', Arial, sans-serif;"/>
         </div>
+        
+        <div class="form-field">
+            <a href="{% url 'public_rooms' %}" 
+            style="
+                display: block;
+                width: 100%;
+                margin-top: 18px;
+                background: #4b5dac;
+                color: #fff;
+                padding: 12px 0;
+                border: none;
+                border-radius: 6px;
+                text-align: center;
+                text-decoration: none;
+                transition: background 0.2s;
+            "
+            onmouseover="this.style.background='#6c7ae0'"
+            onmouseout="this.style.background='#4b5dac'">
+            Find Public Room
+            </a>
+        </div>
+
+        
+
     </form>
 </main>
 

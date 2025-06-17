@@ -1,12 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Public Rooms</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(120deg, #e0e7ff 0%, #f4f6fa 100%);
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Savate', Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -88,13 +91,23 @@
 </head>
 <body>
     <div class="room-list">
-        <h2>Public Rooms</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+            <!-- Back button on the left -->
+            <a href="{% url 'lobby' %}" style="display: inline-flex; align-items: center; text-decoration: none; color: #4b5dac; font-weight: 600; font-size: 1.08em;">
+                <img src="{% static 'images/arrow-left.svg' %}" alt="Back" style="width: 22px; height: 22px; margin-right: 8px;">
+            </a>
+            <!-- Centered heading -->
+            <h2 style="margin: 0; position: absolute; left: 50%; transform: translateX(-50%);">Public Rooms</h2>
+            <!-- Empty div for spacing on the right -->
+            <div style="width: 70px;"></div>
+        </div>
+
         {% if rooms %}
             {% for room in rooms %}
                 <div class="room-card">
                     <div class="room-title">{{ room.room_name }}</div>
                     <div class="room-info">
-                        <span>Created by: {{ room.owner.name|default:"Unknown" }}</span>
+                        <span>Created by: {{ room.owner.name|default:"Admin" }}</span>
                         <span>Members: {{ room.members.count }}</span>
                     </div>
                     <div class="room-desc">{{ room.description|default:"No description." }}</div>
