@@ -5,6 +5,8 @@ services:
     plan: free
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
     startCommand: "gunicorn mychat.wsgi:application"
+    environment:
+      pythonVersion: 3.12.3
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
@@ -14,6 +16,7 @@ services:
           property: connectionString
       - key: DEBUG
         value: "False"
+
 databases:
   - name: mychat-db
   
