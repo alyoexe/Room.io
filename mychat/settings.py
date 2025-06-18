@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-2mo8=7&nhhs^qa9m(6fpl)byd4fwoi_=o(ssc&xxtg-6chonn5"
 os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['room-io.onrender.com']
 
