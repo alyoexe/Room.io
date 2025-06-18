@@ -25,7 +25,7 @@ os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['render.com']
+ALLOWED_HOSTS = ['https://room-io.onrender.com/']
 
 
 # Application definition
