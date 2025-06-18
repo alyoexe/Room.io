@@ -92,7 +92,7 @@ python manage.py runserver
 
 ## 🌐 How to Use
 
-1. Visit `https://room-io.onrender.com/`  
+1. Visit `https://room-io.onrender.com/` [click](https://room-io.onrender.com/)
 2. Create or join a room (choose public/private)  
 3. Share the room name to let others join  
 4. Use video/audio controls to manage the call  
@@ -115,7 +115,6 @@ Please fork the repo and submit a pull request.
 
 ## 📬 Contact
 
-**Your Name**  
 💬[Linkedin](https://www.linkedin.com/in/alexeyo-mathew-alexander/)
 
 ---
